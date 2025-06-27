@@ -202,14 +202,6 @@ export default {
   /* Stop pulsing on hover */
 }
 
-/* .scroll-text {
-  font-size: 1rem;
-  margin-bottom: 5px;
-  font-family: "Lato", sans-serif;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  color: #ffffff;
-} */
 .arrow {
   font-size: 2.5rem;
   animation: bounce 2s infinite;

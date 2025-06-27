@@ -1,7 +1,7 @@
 <template>
     <div class="Header">
         <!-- Bootstrap Navbar -->
-
+         
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
                 <a class="navbar-brand" href="/HomeView.vue"><img src="@/assets/IMG-20250623-WA0016.png" width="40"

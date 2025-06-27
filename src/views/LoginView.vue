@@ -1,5 +1,18 @@
 <template>
     <div class="login d-flex justify-content-center align-items-center vh-100">
+        <div class="box">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            
+        </div>
         <form @submit.prevent="validatePassword">
             <div class="text-center">
                 <img class="align-items-center" src="@/assets/IMG-20250623-WA0016.png" width="150" height="150">
@@ -33,7 +46,7 @@ export default {
             if (this.password === 'password123') {
                 // Clear error message and redirect to management page
                 this.errorMessage = '';
-                this.$router.push('/management'); // Redirect to management page
+                this.$router.push('/management');
             } else {
                 this.errorMessage = 'Invalid password. Please try again.';
             }
@@ -58,7 +71,8 @@ form {
     color: #2199ea;
     border-radius: 10px;
     padding: 10px;
-    background-color: #d1d6da;
+    background-color: rgba(255, 255, 255, 0.604);
+    
 }
 
 label {
@@ -89,10 +103,96 @@ input {
 }
 
 .login {
-    height: 100vh; 
+    height: 100vh;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: linear-gradient(90deg, rgba(2, 0, .6, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%);
 }
 
 .text-white {
     text-decoration: none;
+}
+
+/* Animated boxes */
+.box div {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background-color: transparent;
+    border: 6px solid rgba(255, 255, 255, 0.8);
+}
+
+.box div:nth-child(1) {
+    top: 3%;
+    left: 25%;
+    animation: animate 10s linear infinite;
+}
+
+.box div:nth-child(2) {
+    top: 40%;
+    left: 6%;
+    animation: animate 7s linear infinite;
+}
+
+.box div:nth-child(3) {
+    top: 5%;
+    left: 60%;
+    animation: animate 9s linear infinite;
+}
+
+.box div:nth-child(4) {
+    top: 27%;
+    left: 90%;
+    animation: animate 10s linear infinite;
+}
+
+.box div:nth-child(5) {
+    top: 67%;
+    left: 10%;
+    animation: animate 6s linear infinite;
+}
+
+.box div:nth-child(6) {
+    top: 88%;
+    left: 70%;
+    animation: animate 6s linear infinite;
+}
+
+.box div:nth-child(7) {
+    top: 60%;
+    left: 80%;
+    animation: animate 15s linear infinite;
+}
+
+.box div:nth-child(8) {
+    top: 4%;
+    left: 4%;
+    animation: animate 12s linear infinite;
+}
+
+.box div:nth-child(9) {
+    top: 90%;
+    left: 25%;
+    animation: animate 9s linear infinite;
+}
+
+.box div:nth-child(10) {
+    top: 20%;
+    left: 80%;
+    animation: animate 5s linear infinite;
+}
+
+@keyframes animate {
+    0% {
+        transform: scale(0) translateY(0) rotate(0);
+        opacity: 1;
+    }
+
+    1000% {
+        transform: scale(1.3) translateY(-90px) rotate(360deg);
+        opacity: 0;
+    }
 }
 </style>
