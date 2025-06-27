@@ -116,10 +116,11 @@
 
       <button @click="saveChanges" class="btn btn-success">Save Changes</button>
       <button @click="cancelEdit" class="btn btn-secondary" style="margin-left:10px;">Cancel</button>
+      <button @click="deleteSelectedEmployee" class="btn btn-danger" style="margin-left:10px;">Delete</button>
     </div>
 
    <!-- Show employee cards only if no employee is selected and the dropdown is empty -->
-<!-- <div v-if="!showAddEmployeeForm && !selectedEmployee && !selectedEmployeeId" class="employee-list">
+ <!-- <div v-if="!showAddEmployeeForm && !selectedEmployee && !selectedEmployeeId" class="employee-list">
   <div
     v-for="employee in employees"
     :key="employee.employeeId"
@@ -137,7 +138,7 @@
       Delete
     </button>
   </div>
-</div> -->
+</div>  -->
 
   <!-- Add employee form here -->
 
@@ -198,6 +199,7 @@ export default {
     if (!Array.isArray(clone.leaveRequests)) clone.leaveRequests = [];
     this.selectedEmployee = clone;
   },
+  
   selectEmployeeById() {
     const emp = this.employees.find(e => e.employeeId == this.selectedEmployeeId)
     if (emp) this.selectEmployee(emp)
@@ -208,13 +210,12 @@ export default {
     this.newEmployeeName = ''
     this.showAddEmployeeForm = false
   },
-  deleteEmployee(employeeId) {
-    this.$emit('delete-employee', employeeId)
-    if (this.selectedEmployee && this.selectedEmployee.employeeId === employeeId) {
-      this.selectedEmployee = null
-    }
-    if (this.selectedEmployeeId == employeeId) {
-      this.selectedEmployeeId = ''
+
+  deleteSelectedEmployee() {
+    if (this.selectedEmployee && confirm('Are you sure you want to delete this employee?')) {
+      this.$emit('delete-employee', this.selectedEmployee.employeeId);
+      this.selectedEmployee = null;
+      this.selectedEmployeeId = '';
     }
   },
   addAttendanceRecord() {

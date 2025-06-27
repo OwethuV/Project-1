@@ -39,7 +39,7 @@ export default {
 </script>
 <style>
 .employment-view{
-  background: url('https://i.pinimg.com/736x/4e/33/89/4e3389bde16ec013a3ccf4c6f48c7ea3.jpg');
+  background: url('https://i.pinimg.com/736x/5d/28/06/5d2806f9404075d2e8ad32cd7aab6767.jpg');
   background-repeat: no-repeat;         /* Prevents tiling */
   background-size: cover;               /* Makes image cover the whole area */
   background-position: center center;   /* Centers the image */

@@ -57,7 +57,7 @@ export default {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: #dec7c7;
+    background-color: #ffffff;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
@@ -67,7 +67,7 @@ export default {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: #f1f1f1;
+    background-color: #fbeeee;
     border-radius: 10px;
     box-shadow: 0 4px;
     transform: rotateY(180deg);

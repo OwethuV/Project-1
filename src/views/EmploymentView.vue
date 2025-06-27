@@ -12,6 +12,9 @@
     <button v-if="!showForm" @click="showForm = true" class="btn btn-primary" style="margin-top:20px;">
         Add Employee
     </button>
+    <button v-if="!showDelete" @click="showDelete = true" class="btn btn-danger" style="margin-top:20px; margin-left:10px;">
+        Delete Employee
+      </button>
     
     <!-- Add Employee Form (ONE form at the bottom) -->
     <form v-if="showForm" @submit.prevent="submitForm" class="add-employee-form">
@@ -26,8 +29,32 @@
         <button type="button" @click="showForm = false" class="btn btn-secondary" style="margin-top:10px;">Cancel</button>
     </form>
     
-
+    <!-- Delete Employee Dialog -->
+    <div v-if="showDelete" class="delete-employee-dialog">
+      <label for="deleteEmployeeSelect">Select employee to delete:</label>
+      <select v-model="employeeToDeleteId" id="deleteEmployeeSelect" class="form-control">
+        <option disabled value="">Select employee...</option>
+        <option v-for="emp in employees" :key="emp.employeeId" :value="emp.employeeId">
+          {{ emp.name }}
+        </option>
+      </select>
+      <div class="form-actions">
+        <button
+          :disabled="!employeeToDeleteId"
+          @click="confirmDelete"
+          class="btn btn-danger"
+          style="margin-top:10px;"
+        >Confirm Delete</button>
+        <button
+          @click="cancelDelete"
+          class="btn btn-secondary"
+          style="margin-top:10px; margin-left:10px;"
+        >Cancel</button>
+      </div>
     </div>
+  </div>
+
+    
 </template>
 <script>
 import ManageComp from "@/components/ManageComp.vue"
@@ -138,6 +165,8 @@ export default {
                 },
             ],
             showForm: false,
+            showDelete: false,
+            employeeToDeleteId: '',
             form: {
                 name: '',
                 position: '',
@@ -170,7 +199,19 @@ export default {
                 imageUrl: ''
             }
             this.showForm = false
-        }
+        },
+        confirmDelete() {
+      const emp = this.employees.find(e => e.employeeId === this.employeeToDeleteId)
+      if (emp && confirm(`Are you sure you want to delete ${emp.name}?`)) {
+        this.employees = this.employees.filter(e => e.employeeId !== this.employeeToDeleteId)
+        this.employeeToDeleteId = ''
+        this.showDelete = false
+      }
+    },
+    cancelDelete() {
+      this.employeeToDeleteId = ''
+      this.showDelete = false
+    }
     }
 }
 </script>
@@ -182,7 +223,7 @@ export default {
         ;
     }
     .add-employee-form {
-    background: #85dbbe;
+    background: #63897c;
     padding: 24px 32px;
     border-radius: 12px;
     box-shadow: 0 4px 16px rgba(0,0,0,0.08);
@@ -191,6 +232,23 @@ export default {
     gap: 14px;
     min-width: 320px;
     margin-top: 16px;
+}
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.delete-employee-dialog {
+  background: #fff0f0;
+  border: 1px solid #e57373;
+  border-radius: 10px;
+  padding: 20px 30px;
+  margin: 20px auto 0 auto;
+  max-width: 350px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .form-control {
@@ -216,12 +274,12 @@ export default {
 }
 
 .btn-primary {
-    background: #007bff;
+    background: #5990cc;
     color: #fff;
 }
 
 .btn-success {
-    background: #2199ea;
+    background: #567c95;
     color: #fff;
 }
 
