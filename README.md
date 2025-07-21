@@ -30,8 +30,8 @@ A simple, responsive front-end HR system for ModernTech Solutions. Built to simu
 ## Usage
 Log in using hardcoded dummy credentials to explore the interface. All features operate with client-side dummy data—no back-end or live database is used.
 
-Email: any email
-Password: password123
+- Email: any email
+- Password: password123
 
 ## Team
 - 🧠 Project Manager: Owethu Valantiya
