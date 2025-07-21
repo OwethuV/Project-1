@@ -1,5 +1,5 @@
 <template>
-  <div class="employee-form">
+  <!-- <div class="employee-form">
     <h2 style="color: #2199ea !important;">Submit Leave Request</h2>
     <form @submit.prevent="submitRequest">
       <div class="form-group">
@@ -35,52 +35,52 @@
         {{ confirmationMessage }}
       </p>
     </form>
-  </div>
+  </div> -->
 </template>
 
 <script>
-export default {
-  props: ["employees"],
-  data() {
-    return {
-      employeeId: "",
-      date: "",
-      reason: "",
-      confirmationMessage: "",
-    };
-  },
-  computed: {
-    minDate() {
-      const today = new Date();
-      return today.toISOString().split("T")[0]; // Format: YYYY-MM-DD
-    },
-  },
-  methods: {
-    submitRequest() {
-      if (this.employeeId && this.date && this.reason) {
-        this.$emit("request-submitted", {
-          employeeId: Number(this.employeeId),
-          date: this.date,
-          reason: this.reason,
-        });
-        this.resetForm();
-        this.confirmationMessage = "Leave request submitted successfully!";
-        setTimeout(() => {
-          this.confirmationMessage = "";
-        }, 3000); // Clear message after 3 seconds
-      }
-    },
-    resetForm() {
-      this.employeeId = "";
-      this.date = "";
-      this.reason = "";
-    },
-  },
-};
+// export default {
+//   props: ["employees"],
+//   data() {
+//     return {
+//       employeeId: "",
+//       date: "",
+//       reason: "",
+//       confirmationMessage: "",
+//     };
+//   },
+//   computed: {
+//     minDate() {
+//       const today = new Date();
+//       return today.toISOString().split("T")[0]; // Format: YYYY-MM-DD
+//     },
+//   },
+//   methods: {
+//     submitRequest() {
+//       if (this.employeeId && this.date && this.reason) {
+//         this.$emit("request-submitted", {
+//           employeeId: Number(this.employeeId),
+//           date: this.date,
+//           reason: this.reason,
+//         });
+//         this.resetForm();
+//         this.confirmationMessage = "Leave request submitted successfully!";
+//         setTimeout(() => {
+//           this.confirmationMessage = "";
+//         }, 3000); // Clear message after 3 seconds
+//       }
+//     },
+//     resetForm() {
+//       this.employeeId = "";
+//       this.date = "";
+//       this.reason = "";
+//     },
+//   },
+// };
 </script>
 
 <style scoped>
-h1 h2 h3 h4 {
+/* h1 h2 h3 h4 {
   color: #2199ea !important;
   text-align: center;
   margin-bottom: 30px;
@@ -121,5 +121,5 @@ button:hover {
 .confirmation {
   color: #42b983;
   margin-top: 10px;
-}
+} */
 </style>

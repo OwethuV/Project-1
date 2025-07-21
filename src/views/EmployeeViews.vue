@@ -2,7 +2,7 @@
   <Navbar />
   <div class="employee-view">
     <!-- Siphokazi -->
-    <h1 class="text-center"><i>Attendance Records</i></h1>
+    <!-- <h1 class="text-center"><i>Attendance Records</i></h1>
     <table class="attendance-table">
       <thead>
         <tr>
@@ -39,7 +39,7 @@
           </td>
         </tr>
       </tbody>
-    </table>
+    </table> -->
 
     <!-- Aisha -->
 

@@ -28,59 +28,56 @@
     </table>
     <div v-if="selectedEmployee" ref="payslipSection">
       <Payslip :employee="selectedEmployee" />
-   </div>
-
+    </div>
   </div>
   <Footer />
 </template>
 
 <script setup>
-  import Navbar from '@/components/Navbar.vue'
-  import Footer from '@/components/Footer.vue'
+import Navbar from "@/components/Navbar.vue";
+import Footer from "@/components/Footer.vue";
 </script>
 
 <script>
-import Payslip from '@/components/Payslip.vue'
-export default{
-  name:'PayrollView',
-  components:{Payslip},
-  data(){
-    return{
-      payrollData:[],
-      selectedEmployee: null
-    }
+import Payslip from "@/components/Payslip.vue";
 
+export default {
+  name: "PayrollView",
+  components: { Payslip },
+  data() {
+    return {
+      payrollData: [],
+      selectedEmployee: null,
+    };
   },
-  methods:{
-    viewPayslip(employee){
+  methods: {
+    viewPayslip(employee) {
       this.selectedEmployee = employee;
 
-     this.$nextTick(() => {
-       const section = this.$refs.payslipSection;
-       if (section && typeof section.scrollIntoView === 'function') {
-        section.scrollIntoView({ behavior: 'smooth' });
-       } else {
-        console.warn("Payslip section not found or not ready for scrolling.");
-       }
-     });
-    }
+      this.$nextTick(() => {
+        const section = this.$refs.payslipSection;
+        if (section && typeof section.scrollIntoView === "function") {
+          section.scrollIntoView({ behavior: "smooth" });
+        } else {
+          console.warn("Payslip section not found or not ready for scrolling.");
+        }
+      });
+    },
   },
-  mounted(){
-    fetch('http://localhost:8080/payroll_data.json')
-    .then(res => res.json())
-    .then(data => {
-      this.payrollData = data.payrollData;
-    })
-  }
-
+  mounted() {
+    fetch("http://localhost:8080/payroll_data.json")
+      .then((res) => res.json())
+      .then((data) => {
+        this.payrollData = data.payrollData;
+      });
+  },
 };
 </script>
 <style>
-
 body {
-  background-color: #f4f6f8; 
+  background-color: #f4f6f8;
   margin: 0;
-  font-family: 'Segoe UI', sans-serif;
+  font-family: "Segoe UI", sans-serif;
 }
 
 .custom-table {
@@ -88,7 +85,7 @@ body {
   border-collapse: separate;
   border-spacing: 0;
   margin-top: 1rem;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
   background-color: #ffffff;
   border-radius: 8px;
@@ -113,7 +110,7 @@ body {
 }
 
 .custom-table tr:nth-child(even) td {
-  background-color: #f0f3f6; 
+  background-color: #f0f3f6;
 }
 
 .custom-table button {
@@ -130,5 +127,4 @@ body {
 .custom-table button:hover {
   background-color: #357ab8;
 }
-
 </style>

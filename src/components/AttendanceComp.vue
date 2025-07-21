@@ -232,7 +232,7 @@ export default {
   max-width: 1000px;
   margin: 0 auto;
   padding: 2vw;
-  overflow-x: hidden;
+  
 }
 .search-box {
   margin-bottom: 20px;

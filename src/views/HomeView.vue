@@ -74,9 +74,9 @@ import Footer from '@/components/Footer.vue';
 </script>
 
 <script>
-import employeeInfo from '/PROJECT MODULE 1/moderntech-solutions/public/employee_info.json';
-import attendanceData from '/PROJECT MODULE 1/moderntech-solutions/public/attendance.json';
-import payrollData from '/PROJECT MODULE 1/moderntech-solutions/public/payroll_data.json';
+import employeeInfo from '@/../public/employee_info.json';
+import attendanceData from '@/../public/attendance.json';
+import payrollData from '@/../public/payroll_data.json';
 
 export default {
   name: 'HomeView',

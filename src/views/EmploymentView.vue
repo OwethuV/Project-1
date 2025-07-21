@@ -1,15 +1,24 @@
 <template>
   <Navbar />
-  <div class="container">
+  <div class="containerr">
     <h2>Employee Directory</h2>
     <p class="mb-4">
       Meet our talented team members who drive innovation and excellence at
       Modern Tech Solutions.
     </p>
   </div>
+  <div class="container">
+  <input
+    v-model="searchQuery"
+    type="text"
+    placeholder="Search by name, position or department"
+    class="form-control search-bar"
+  />
+</div>
+
   <section>
     <manage-comp
-      v-for="employee in employees"
+      v-for="employee in filteredEmployees"
       :key="employee.employeeId"
       :employee="employee"
     />
@@ -142,6 +151,7 @@ export default {
   components: { ManageComp },
   data() {
     return {
+      searchQuery:"",
       employees: [
         {
           employeeId: 1,
@@ -268,6 +278,17 @@ export default {
       },
     };
   },
+  computed: {
+  filteredEmployees() {
+    if (!this.searchQuery) return this.employees;
+    const query = this.searchQuery.toLowerCase();
+    return this.employees.filter(emp =>
+      emp.name.toLowerCase().includes(query) ||
+      emp.position.toLowerCase().includes(query) ||
+      emp.department.toLowerCase().includes(query)
+    );
+  },
+},
   methods: {
     submitForm() {
       // Add a new employee to the list
@@ -416,7 +437,7 @@ p {
   color: #666;
 }
 
-.container {
+.containerr {
   position: relative;
   text-align: center;
   margin-top: 20px;
@@ -429,4 +450,5 @@ p {
   font-size: 1.2em;
   color: #1c1c1c;
 }
+
 </style>
