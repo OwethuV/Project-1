@@ -2,30 +2,35 @@
   <Navbar />
   <div class="payroll">
     <h1><i>Compensation Information</i></h1>
-    <table class="custom-table">
-      <thead>
-        <tr>
-          <th>Employee ID</th>
-          <th>Name</th>
-          <th>Hours Worked</th>
-          <th>Leave Deductions</th>
-          <th>Final Salary</th>
-          <th>Payslip</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="employee in payrollData" :key="employee.employeeId">
-          <td>{{ employee.employeeId }}</td>
-          <td>{{ employee.name }}</td>
-          <td>{{ employee.hoursWorked }}</td>
-          <td>{{ employee.leaveDeductions }}</td>
-          <td>{{ employee.finalSalary }}</td>
-          <td>
-            <button @click="viewPayslip(employee)">View Payslip</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+
+    <!-- Add this wrapper -->
+    <div class="table-container">
+      <table class="custom-table">
+        <thead>
+          <tr>
+            <th>Employee ID</th>
+            <th>Name</th>
+            <th>Hours Worked</th>
+            <th>Leave Deductions</th>
+            <th>Final Salary</th>
+            <th>Payslip</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="employee in payrollData" :key="employee.employeeId">
+            <td>{{ employee.employeeId }}</td>
+            <td>{{ employee.name }}</td>
+            <td>{{ employee.hoursWorked }}</td>
+            <td>{{ employee.leaveDeductions }}</td>
+            <td>{{ employee.finalSalary }}</td>
+            <td>
+              <button @click="viewPayslip(employee)">View Payslip</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
     <div v-if="selectedEmployee" ref="payslipSection">
       <Payslip :employee="selectedEmployee" />
     </div>
@@ -78,6 +83,15 @@ body {
   background-color: #f4f6f8;
   margin: 0;
   font-family: "Segoe UI", sans-serif;
+}
+.table-container {
+  padding: 1rem;
+  width: auto;
+  margin:  auto;
+}
+
+.payroll {
+  padding: 1rem;
 }
 
 .custom-table {

@@ -30,15 +30,14 @@ export default {
   max-height: 420px;
   min-height: 220px;
   perspective: 1000px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 40px;
+  margin: 30px auto 40px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 .flip-card-inner {
   position: relative;
   width: 100%;
   height: 100%;
-  transition: transform 0.6s;
+  transition: transform 0.6s ease;
   transform-style: preserve-3d;
 }
 .flip-card:hover .flip-card-inner {

@@ -2,6 +2,7 @@
   "name": "moderntech-solutions",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build"
@@ -28,5 +29,10 @@
     "last 2 versions",
     "not dead",
     "not ie 11"
-  ]
+  ],
+  "description": "A simple, responsive front-end HR system for ModernTech Solutions. Built to simulate employee management, payroll, and time-off tracking using dummy data. This project was created as a proof of concept to address inefficiencies in the company's current HR workflow.",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }

@@ -148,11 +148,14 @@ import Footer from '@/components/Footer.vue'
 </script>
 
 <style>
+
+
 .review-table {
-  width: 100%;
+  width: 96%;
   border-collapse: separate;
   border-spacing: 0;
   margin-top: 1rem;
+  margin-left: 25px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
   background-color: #ffffff;

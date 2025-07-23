@@ -1,35 +1,33 @@
 <template>
-  <aside :class="app">
-    <router-view />
-  </aside>
+  <div class="page-wrapper">
+    <div
+      v-if="showBackground"
+      :class="['background-layer', computedClass]"
+    ></div>
+
+    <aside>
+      <router-view />
+    </aside>
+  </div>
 </template>
 
 <script>
-export default{
-  data(){
-    return{
-      app:""
-    }
-  },
-  methods:{
-    changeBackground(){
-      if(this.$route.path==='/employment'){
-        this.app='employment-view';
-      }else if(this.$route.path==='/attendance'){
-        this.app='attendance-bg';
+export default {
+  computed: {
+    computedClass() {
+      if (this.$route.path === '/employment') {
+        return 'employment-view-bg';
+      } else if (this.$route.path === '/attendance') {
+        return 'attendance-bg';
+      } else {
+        return '';
       }
+    },
+    showBackground() {
+      return ['/employment', '/attendance'].includes(this.$route.path);
     }
-  },
-  watch:{
-    $route(newValue){
-      this.changeBackground()
-    }
-  },
-  mounted(){
-    this.changeBackground();
   }
-}
-
+};
 </script>
 
 <style>
@@ -39,24 +37,31 @@ export default{
     width: 100vw;
     margin: 0;
     padding: 0;
+    overflow-x: hidden;
   }
   
-  .attendance-bg {
-    min-height: 100vh;
-    width: 100vw;
-    background: url("https://i.pinimg.com/736x/5d/28/06/5d2806f9404075d2e8ad32cd7aab6767.jpg")
-      no-repeat center center;
-    background-size: cover;
-  }
-  
-  .employment-view {
-    min-height: 100vh;
-    width: 100vw;
-    height: 100%;
-    background: url("https://i.pinimg.com/736x/36/93/34/369334c10e0f3b890c90859362d513bd.jpg")
-      no-repeat center center;
-    background-size: cover;
-  }
+.page-wrapper {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  overflow-x: hidden;
+}
+.employment-view-bg {
+  background-color: #219aea0f;
+}
+
+.background-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-height: 100%;
+  width: 100%;
+  z-index: -1;
+}
+
+.attendance-bg {
+  background-color: #219aea0f;
+}
 
   #app {
     font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -69,7 +74,6 @@ export default{
 aside {
   min-height: 100vh;
   width: 100vw;
-  height: 100vh;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -78,6 +82,7 @@ aside {
   padding: 0;
   margin: 0;
 }
+
 
 /* Responsive font and padding for smaller screens */
 @media (max-width: 1300px) {

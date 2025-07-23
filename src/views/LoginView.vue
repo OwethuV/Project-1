@@ -82,12 +82,13 @@ label {
 
 .button {
     display: block;
-    width: 96.5%;
+    width: 94.5%;
     height: 40px;
     letter-spacing: .5px;
     background-color: #0f5f96 !important;
     border: none;
     align-items: center;
+    margin-left: 20px;
 }
 
 input {

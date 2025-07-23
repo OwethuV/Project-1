@@ -290,13 +290,26 @@ h1 h2 h3 h4 {
   grid-template-columns: 1fr 1fr;
   gap: 30px;
 }
+
+.content-grid > *:first-child {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.content-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
 .attendance-display {
   background-color: #eeeeee;
   padding: 20px;
   border-radius: 8px;
 }
 
-/* Siphokazi */
+/* Siphokazi
 .attendance-table {
   width: 100%;
   border-collapse: collapse;
@@ -338,19 +351,7 @@ h1 h2 h3 h4 {
   vertical-align: middle;
 }
 
-/* Center the "Submit Leave Request" button in EmployeeComp */
-.content-grid > *:first-child {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
 
-/* Stack the content grid vertically instead of side by side */
-.content-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-}
 
 .attendance-table tr:hover {
   background-color: #f1f7ff;
@@ -371,5 +372,5 @@ h1 h2 h3 h4 {
 
 .attendance-table td span {
   font-weight: 500;
-}
+} */
 </style>

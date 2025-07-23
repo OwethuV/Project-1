@@ -1,94 +1,97 @@
 <template>
   <Navbar />
-  <div class="containerr">
-    <h2>Employee Directory</h2>
-    <p class="mb-4">
-      Meet our talented team members who drive innovation and excellence at
-      Modern Tech Solutions.
-    </p>
+
+  <!-- ✅ Show Main Directory -->
+  <div v-if="!showForm && !showDelete">
+    <div class="containerr">
+      <h2>Employee Directory</h2>
+      <p class="mb-4">
+        Meet our talented team members who drive innovation and excellence at
+        Modern Tech Solutions.
+      </p>
+    </div>
+
+    <div class="container">
+      <input
+        v-model="searchQuery"
+        type="text"
+        placeholder="Search by name, position or department"
+        class="search-bar"
+      />
+    </div>
+
+    <section>
+      <manage-comp
+        v-for="employee in filteredEmployees"
+        :key="employee.employeeId"
+        :employee="employee"
+      />
+    </section>
+
+    <div class="container">
+      <button
+        @click="showForm = true"
+        class="btn btn-primary"
+        style="margin-top: 20px"
+      >
+        Add Employee
+      </button>
+      <button
+        @click="showDelete = true"
+        class="btn btn-danger"
+        style="margin-top: 20px; margin-left: 10px"
+      >
+        Delete Employee
+      </button>
+    </div>
   </div>
-  <div class="container">
-  <input
-    v-model="searchQuery"
-    type="text"
-    placeholder="Search by name, position or department"
-    class="form-control search-bar"
-  />
-</div>
 
-  <section>
-    <manage-comp
-      v-for="employee in filteredEmployees"
-      :key="employee.employeeId"
-      :employee="employee"
-    />
-  </section>
+  <!-- ✅ Delete Dialog -->
+  <div v-if="showDelete" class="delete-employee-dialog">
+    <label for="deleteEmployeeSelect">Select employee to delete:</label>
+    <select
+      v-model="employeeToDeleteId"
+      id="deleteEmployeeSelect"
+      class="form-control"
+    >
+      <option disabled value="">Select employee...</option>
+      <option
+        v-for="emp in employees"
+        :key="emp.employeeId"
+        :value="emp.employeeId"
+      >
+        {{ emp.name }}
+      </option>
+    </select>
+    <div class="form-actions">
+      <button
+        :disabled="!employeeToDeleteId"
+        @click="confirmDelete"
+        class="btn btn-danger"
+        style="margin-top: 10px"
+      >
+        Confirm Delete
+      </button>
+      <button
+        @click="cancelDelete"
+        class="btn btn-secondary"
+        style="margin-top: 10px; margin-left: 10px"
+      >
+        Cancel
+      </button>
+    </div>
+  </div>
 
-  <div class="container">
-    <button
-      v-if="!showForm"
-      @click="showForm = true"
-      class="btn btn-primary"
-      style="margin-top: 20px"
-    >
-      Add Employee
-    </button>
-    <button
-      v-if="!showDelete"
-      @click="showDelete = true"
-      class="btn btn-danger"
-      style="margin-top: 20px; margin-left: 10px"
-    >
-      Delete Employee
-    </button>
-
-    <!-- Add Employee Form (ONE form at the bottom) -->
-    <form
-      v-if="showForm"
-      @submit.prevent="submitForm"
-      class="add-employee-form"
-    >
-      <input
-        v-model="form.name"
-        placeholder="Name"
-        required
-        class="form-control"
-      />
-      <input
-        v-model="form.position"
-        placeholder="Position"
-        required
-        class="form-control"
-      />
-      <input
-        v-model="form.department"
-        placeholder="Department"
-        required
-        class="form-control"
-      />
-      <input
-        v-model="form.salary"
-        placeholder="Salary"
-        type="number"
-        required
-        class="form-control"
-      />
-      <input
-        v-model="form.contact"
-        placeholder="Contact"
-        required
-        class="form-control"
-      />
-      <input
-        v-model="form.employmentHistory"
-        placeholder="Employment History"
-        class="form-control"
-      />
-      <input
-        v-model="form.imageUrl"
-        placeholder="Image URL"
-        class="form-control"
-      />
+  <!-- ✅ Add Employee Form -->
+  <div v-if="showForm" class="overlay-form-container">
+    <form @submit.prevent="submitForm" class="add-employee-form centered-form">
+      <input v-model="form.name" placeholder="Name" required class="form-control" />
+      <input v-model="form.position" placeholder="Position" required class="form-control" />
+      <input v-model="form.department" placeholder="Department" required class="form-control" />
+      <input v-model="form.salary" placeholder="Salary" type="number" required class="form-control" />
+      <input v-model="form.contact" placeholder="Contact" required class="form-control" />
+      <input v-model="form.employmentHistory" placeholder="Employment History" class="form-control" />
+      <input v-model="form.imageUrl" placeholder="Image URL" class="form-control" />
       <button type="submit" class="btn btn-success" style="margin-top: 10px">
         Add Employee
       </button>
@@ -101,44 +104,10 @@
         Cancel
       </button>
     </form>
-
-    <!-- Delete Employee Dialog -->
-    <div v-if="showDelete" class="delete-employee-dialog">
-      <label for="deleteEmployeeSelect">Select employee to delete:</label>
-      <select
-        v-model="employeeToDeleteId"
-        id="deleteEmployeeSelect"
-        class="form-control"
-      >
-        <option disabled value="">Select employee...</option>
-        <option
-          v-for="emp in employees"
-          :key="emp.employeeId"
-          :value="emp.employeeId"
-        >
-          {{ emp.name }}
-        </option>
-      </select>
-      <div class="form-actions">
-        <button
-          :disabled="!employeeToDeleteId"
-          @click="confirmDelete"
-          class="btn btn-danger"
-          style="margin-top: 10px"
-        >
-          Confirm Delete
-        </button>
-        <button
-          @click="cancelDelete"
-          class="btn btn-secondary"
-          style="margin-top: 10px; margin-left: 10px"
-        >
-          Cancel
-        </button>
-      </div>
-    </div>
   </div>
 </template>
+
+
 
 <script setup>
 import Navbar from "@/components/Navbar.vue";
@@ -339,6 +308,17 @@ section {
   box-sizing: border-box;
   overflow-x: hidden;
 }
+.employment-view {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #219aea0f;
+  z-index: -1;
+}
+
+
 @media (max-width: 1300px) {
   section {
     grid-template-columns: repeat(3, 1fr);
@@ -354,15 +334,42 @@ section {
     grid-template-columns: 1fr;
   }
 }
+.overlay-form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+  width: 100vw;
+}
+
+.centered-form {
+  max-width: 320px; /* smaller width */
+  width: 100%;
+  padding: 20px; /* add some padding */
+  box-sizing: border-box;
+}
+
+.search-bar {
+  margin-top: -30px; /* move up by decreasing this */
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  width: 100%;
+  /* max-width: 400px; */
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+
 .add-employee-form {
   background: #63897c;
-  padding: 24px 32px;
-  border-radius: 12px;
+  padding: 16px 20px;
+  border-radius: 8px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
   display: flex;
   flex-direction: column;
-  gap: 14px;
-  min-width: 320px;
+  gap: 10px;
+  min-width: 400px;
   margin-top: 16px;
 }
 .action-buttons {
@@ -384,7 +391,7 @@ section {
 }
 
 .form-control {
-  padding: 8px 12px;
+  padding: 6px 10px;
   border-radius: 5px;
   border: 1px solid #ccc;
   font-size: 1em;
@@ -418,6 +425,7 @@ section {
 .btn-secondary {
   background: #6c757d;
   color: #fff;
+  
 .container {
   position: relative;
   text-align: center;
